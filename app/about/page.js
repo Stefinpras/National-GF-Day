@@ -1,7 +1,7 @@
 import PageShell from '@/components/PageShell';
 import { makeSvg } from '@/lib/placeholders';
 
-const riniIMG = '/assets/rini.png';
+const riniIMG = '/assets/Rini.png';
 
 export default function AboutPage() {
   return (
