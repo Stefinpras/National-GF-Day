@@ -1,0 +1,348 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --blush: #FBEFEF;
+  --pink-light: #FFE2E2;
+  --pink-mid: #F5CBCB;
+  --lavender: #C5B3D3;
+  --lavender-deep: #9C82B3;
+  --ink: #2B2230;
+  --ink-soft: #5B4E63;
+
+  --glass-bg: rgba(255, 255, 255, 0.5);
+  --glass-bg-strong: rgba(255, 255, 255, 0.72);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --glass-tint: rgba(197, 179, 211, 0.16);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at 14% 10%, rgba(197, 179, 211, 0.28), transparent 45%),
+    radial-gradient(circle at 88% 14%, rgba(245, 203, 203, 0.45), transparent 48%),
+    radial-gradient(circle at 18% 92%, rgba(255, 226, 226, 0.6), transparent 50%),
+    radial-gradient(circle at 92% 90%, rgba(197, 179, 211, 0.22), transparent 46%),
+    linear-gradient(180deg, #FFF9F7 0%, #FBEFEF 45%, #FFF3EE 100%);
+  color: var(--ink);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
+  position: relative;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(70px);
+  animation: blobMove 20s ease-in-out infinite;
+}
+body::before {
+  width: 42vw;
+  height: 42vw;
+  top: -12vw;
+  right: -10vw;
+  background: radial-gradient(circle, rgba(197, 179, 211, 0.35), transparent 70%);
+}
+body::after {
+  width: 38vw;
+  height: 38vw;
+  bottom: -10vw;
+  left: -8vw;
+  background: radial-gradient(circle, rgba(245, 203, 203, 0.5), transparent 70%);
+  animation-delay: -9s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+h1, h2, h3 {
+  color: var(--ink);
+}
+
+::selection {
+  background: var(--lavender);
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--lavender), var(--pink-mid));
+  border-radius: 10px;
+}
+
+button, a, input {
+  font-family: inherit;
+}
+
+/* ===================== Apple-style glass system ===================== */
+.glass {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--tw-shadow, 0 8px 32px rgba(156,130,179,0.18));
+}
+
+.glass-card {
+  position: relative;
+  background: linear-gradient(155deg, var(--glass-bg-strong), var(--glass-bg));
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 34px -12px rgba(156,130,179,0.28), inset 0 1px 0 rgba(255,255,255,0.8);
+  transition: transform 0.4s cubic-bezier(.2,.8,.2,1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.glass-card:hover {
+  border-color: rgba(197,179,211,0.55);
+  box-shadow: 0 20px 46px -14px rgba(156,130,179,0.34), inset 0 1px 0 rgba(255,255,255,0.85);
+}
+
+.glass-pill {
+  background: var(--glass-bg-strong);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+}
+
+.glass-btn {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition: transform 0.3s cubic-bezier(.2,.8,.2,1), box-shadow 0.3s ease, filter 0.3s ease;
+}
+.glass-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 20%, rgba(255,255,255,0.65) 40%, transparent 60%);
+  background-size: 250% 100%;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+.glass-btn:hover::before {
+  opacity: 1;
+  animation: shimmer 1.1s linear infinite;
+}
+.glass-btn:hover {
+  transform: translateY(-3px) scale(1.015);
+  filter: brightness(1.02);
+}
+.glass-btn:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+.glow-ring {
+  box-shadow: 0 0 0 1px rgba(197,179,211,0.5), 0 12px 30px -10px rgba(156,130,179,0.55);
+}
+
+/* thin gradient hairline border */
+.gradient-border {
+  position: relative;
+  border-radius: inherit;
+}
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--lavender), #fff 55%, var(--pink-mid));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ===================== Gift box (landing page) ===================== */
+.gift-box .base {
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 104px;
+  background: linear-gradient(135deg, var(--pink-mid), var(--lavender));
+  border-radius: 12px;
+  box-shadow: 0 18px 40px -16px rgba(156,130,179,0.5);
+}
+.gift-box .lid {
+  position: absolute;
+  top: 14px; left: -10px; right: -10px; height: 34px;
+  background: linear-gradient(135deg, #fff, var(--pink-light));
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(156,130,179,0.3);
+  transition: transform .65s cubic-bezier(.65,0,.35,1), opacity .5s ease;
+  transform-origin: left center;
+}
+.gift-box .ribbon-v {
+  position: absolute;
+  top: 14px; bottom: 0; left: 50%; width: 20px; transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--lavender-deep), var(--lavender));
+}
+.gift-box .bow {
+  position: absolute;
+  top: -16px; left: 50%; transform: translateX(-50%);
+  font-size: 2.2rem;
+  transition: transform .5s ease, opacity .4s ease;
+  filter: drop-shadow(0 4px 10px rgba(156,130,179,0.5));
+}
+.gift-box-wrap.opened .lid { transform: translate(-32px, -76px) rotate(-45deg); opacity: 0; }
+.gift-box-wrap.opened .bow { transform: translate(-50%, -96px) scale(.6) rotate(-25deg); opacity: 0; }
+
+/* ===================== Envelope (letter page) ===================== */
+.envelope {
+  width: 280px; max-width: 80vw; height: 190px;
+  background: linear-gradient(135deg, var(--lavender), var(--lavender-deep));
+  border-radius: 14px;
+  position: relative;
+  box-shadow: 0 26px 60px -20px rgba(156,130,179,0.55);
+  overflow: visible;
+}
+.envelope::after {
+  content: '';
+  position: absolute; left: 0; right: 0; bottom: 0; height: 95px;
+  background: linear-gradient(135deg, rgba(43,34,48,0.14), transparent 60%);
+  border-radius: 0 0 14px 14px;
+}
+.envelope .flap {
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 0; width: 0; margin: 0 auto;
+  border-left: 140px solid transparent;
+  border-right: 140px solid transparent;
+  border-top: 95px solid #7C6690;
+  max-width: 100%;
+  transform-origin: top center;
+  transition: transform .6s cubic-bezier(.65,0,.35,1);
+  z-index: 3;
+}
+.envelope.opened .flap { transform: rotateX(180deg); }
+.envelope .letter-inside {
+  position: absolute; left: 14px; right: 14px; bottom: 10px; top: 56px;
+  background: #fff;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 -2px 8px rgba(43,34,48,0.12);
+  z-index: 1;
+  transition: transform .7s cubic-bezier(.3,0,.2,1) .15s;
+}
+.envelope.opened .letter-inside { transform: translateY(-108px); }
+.envelope .seal {
+  position: absolute; top: 66px; left: 50%; transform: translate(-50%, 0);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff, var(--pink-mid) 70%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; box-shadow: 0 4px 16px rgba(156,130,179,0.55);
+  z-index: 4; transition: opacity .3s ease;
+}
+.envelope.opened .seal { opacity: 0; }
+.envelope.shake { animation: shake .5s ease; }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+/* ===================== Potion bottle (bottle page) ===================== */
+.potion-bottle {
+  position: relative;
+  width: 140px;
+  height: 190px;
+  margin: 0 auto;
+}
+.potion-bottle .neck {
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 38px; height: 34px;
+  background: linear-gradient(180deg, var(--lavender-deep), var(--lavender));
+  border-radius: 8px 8px 4px 4px;
+}
+.potion-bottle .cork {
+  position: absolute;
+  top: -14px; left: 50%; transform: translateX(-50%);
+  width: 46px; height: 20px;
+  background: linear-gradient(180deg, #DCC9A9, #B99E77);
+  border-radius: 6px;
+}
+.potion-bottle .glass-body {
+  position: absolute;
+  top: 30px; left: 0; right: 0; bottom: 0;
+  border-radius: 50% 50% 46% 46% / 40% 40% 60% 60%;
+  background: rgba(255,255,255,0.35);
+  border: 2px solid rgba(255,255,255,0.85);
+  overflow: hidden;
+  box-shadow: 0 20px 40px -16px rgba(156,130,179,0.45), inset 0 2px 10px rgba(255,255,255,0.6);
+}
+.potion-bottle .liquid {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, var(--pink-mid), var(--lavender));
+  transition: height 0.4s ease-out;
+}
+.potion-bottle .liquid::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; top: -6px; height: 12px;
+  background: inherit;
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+/* ===================== Puzzle heart pieces ===================== */
+.puzzle-slot {
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.puzzle-piece {
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(.2,.8,.2,1), box-shadow 0.25s ease;
+}
+.puzzle-piece:active {
+  transform: scale(0.94);
+}
+
+@keyframes confettiFall {
+  to { transform: translateY(112vh) rotate(300deg); opacity: .15; }
+}
+
+/* ===================== EQ bars for song page ===================== */
+.eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 16px;
+}
+.eq-bars span {
+  width: 3px;
+  height: 30%;
+  border-radius: 2px;
+  background: currentColor;
+  animation: eq 0.9s ease-in-out infinite;
+}
+.eq-bars span:nth-child(2) { animation-delay: 0.15s; }
+.eq-bars span:nth-child(3) { animation-delay: 0.3s; }
+.eq-bars span:nth-child(4) { animation-delay: 0.45s; }
