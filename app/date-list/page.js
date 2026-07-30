@@ -37,7 +37,7 @@ const DATES = [
     label: 'Date 6',
     title: 'Photobooth',
     description: 'Kita buatt koleksi photobooth kita yang banyakk yawww.',
-    image: '/assets/photoboth.jpg',
+    image: '/assets/Photoboth.jpg',
   },
 ];
 
