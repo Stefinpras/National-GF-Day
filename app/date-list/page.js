@@ -45,7 +45,7 @@ export default function DateListPage() {
   return (
     <PageShell
       eyebrow="Our Little Dates"
-      title="6 Date yang udah dan mau Aku Lakuin Bareng Kamu"
+      title="6 Date yang mau Aku Lakuin Bareng Kamu"
       subtitle="Eummmmm, kita bikinn whistlist date yang banyak yuk sayanggg"
       footerHref="/photobooth"
       footerLabel="Lanjut sayanggg"
